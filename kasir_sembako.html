@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Kasir Toko Sembako</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        .program-container {
+            max-width: 900px;
+            margin: 120px auto 40px;
+            padding: 2rem;
+        }
+
+        .program-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .program-header::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--accent-gradient);
+            margin: 1rem auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .program-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: white;
+            background: var(--accent-gradient);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .output-example {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .note-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--text-color);
+        }
+
+        .program-section explanation-section {
+            margin-top: 2rem;
+        }
+
+        .explanation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .explanation-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .card-header {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-content {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="program-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Kembali ke Portfolio</span>
+        </a>
+
+        <div class="program-header">
+            <h1>Program Kasir Toko Sembako</h1>
+            <p>Program sederhana untuk menghitung total belanja dengan fitur diskon</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <i class="fas fa-calculator feature-icon"></i>
+                <h3>Perhitungan Otomatis</h3>
+                <p>Menghitung total belanja dengan cepat dan akurat</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-percent feature-icon"></i>
+                <h3>Sistem Diskon</h3>
+                <p>Diskon otomatis untuk pembelian di atas nominal tertentu</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-receipt feature-icon"></i>
+                <h3>Struk Belanja</h3>
+                <p>Menampilkan rincian belanja dengan format yang rapi</p>
+            </div>
+        </div>
+
+        <div class="program-section explanation-section">
+            <h2><i class="fas fa-book-open"></i> Penjelasan Elemen Program</h2>
+            
+            <div class="explanation-grid">
+                <div class="explanation-card">
+                    <div class="card-header">
+                        <i class="fas fa-cube"></i>
+                        <h3>Variabel & Array</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><code>string namaBarang[100]</code> - Array untuk menyimpan nama-nama barang</li>
+                            <li><code>int jumlah[100]</code> - Array untuk menyimpan jumlah setiap barang</li>
+                            <li><code>double harga[100]</code> - Array untuk menyimpan harga per item</li>
+                            <li><code>double total</code> - Variabel untuk menyimpan total belanja</li>
+                            <li><code>double diskon</code> - Variabel untuk menyimpan nilai diskon</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="explanation-card">
+                    <div class="card-header">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Perhitungan</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><code>subtotal = harga[i] * jumlah[i]</code> - Menghitung subtotal per item</li>
+                            <li><code>total += subtotal</code> - Menambahkan subtotal ke total belanja</li>
+                            <li><code>diskon = 0.1 * total</code> - Menghitung diskon 10%</li>
+                            <li><code>diskon = 0.05 * total</code> - Menghitung diskon 5%</li>
+                            <li><code>total - diskon</code> - Menghitung total akhir setelah diskon</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="explanation-card">
+                    <div class="card-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Struktur Kontrol</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><code>for loop</code> - Untuk input dan menampilkan data barang</li>
+                            <li><code>if-else</code> - Untuk menentukan besaran diskon berdasarkan total belanja</li>
+                            <li>Kondisi diskon:
+                                <ul>
+                                    <li>≥ Rp. 500.000 → Diskon 10%</li>
+                                    <li>≥ Rp. 200.000 → Diskon 5%</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="explanation-card">
+                    <div class="card-header">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Format Output</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><code>setw()</code> - Mengatur lebar kolom output</li>
+                            <li><code>left</code> - Rata kiri untuk teks</li>
+                            <li><code>fixed</code> - Format angka desimal</li>
+                            <li><code>endl</code> - Pindah baris baru</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="program-section">
+            <h2>Kode Program</h2>
+            <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    // Deklarasi variabel
+    string namaBarang[100];
+    int jumlah[100];
+    double harga[100], total = 0;
+    int n;
+    double diskon = 0;
+    
+    cout << "===== PROGRAM KASIR TOKO SEMBAKO =====" << endl;
+    cout << "Masukkan jumlah jenis barang: ";
+    cin >> n;
+    
+    // Input data barang
+    for(int i = 0; i < n; i++) {
+        cout << "\nBarang ke-" << i+1 << endl;
+        cout << "Nama Barang  : ";
+        cin.ignore();
+        getline(cin, namaBarang[i]);
+        cout << "Harga        : Rp. ";
+        cin >> harga[i];
+        cout << "Jumlah       : ";
+        cin >> jumlah[i];
+    }
+    
+    // Hitung total
+    cout << "\n========= STRUK BELANJA =========" << endl;
+    cout << "No  Barang\t\tHarga\tJumlah\tSubtotal" << endl;
+    cout << "----------------------------------------" << endl;
+    
+    for(int i = 0; i < n; i++) {
+        double subtotal = harga[i] * jumlah[i];
+        total += subtotal;
+        cout << i+1 << "   " << left << setw(15) << namaBarang[i] 
+             << "Rp." << setw(8) << harga[i]
+             << setw(8) << jumlah[i]
+             << "Rp." << subtotal << endl;
+    }
+    
+    // Hitung diskon
+    if(total >= 500000) {
+        diskon = 0.1 * total; // Diskon 10%
+    } else if(total >= 200000) {
+        diskon = 0.05 * total; // Diskon 5%
+    }
+    
+    // Tampilkan total dan diskon
+    cout << "----------------------------------------" << endl;
+    cout << "Total Belanja     : Rp." << total << endl;
+    cout << "Diskon            : Rp." << diskon << endl;
+    cout << "Total Pembayaran  : Rp." << total - diskon << endl;
+    cout << "========= TERIMA KASIH =========" << endl;
+    
+    return 0;
+}</code></pre>
+
+            <div class="note-box">
+                <h3><i class="fas fa-lightbulb"></i> Fitur Program</h3>
+                <ul>
+                    <li>Input multiple barang dengan nama, harga, dan jumlah</li>
+                    <li>Perhitungan subtotal untuk setiap barang</li>
+                    <li>Sistem diskon otomatis:
+                        <ul>
+                            <li>Diskon 10% untuk pembelian ≥ Rp. 500.000</li>
+                            <li>Diskon 5% untuk pembelian ≥ Rp. 200.000</li>
+                        </ul>
+                    </li>
+                    <li>Tampilan struk yang rapi dengan format tabel</li>
+                </ul>
+            </div>
+
+            <h2>Contoh Output Program</h2>
+            <div class="output-example">
+===== PROGRAM KASIR TOKO SEMBAKO =====
+Masukkan jumlah jenis barang: 3
+
+Barang ke-1
+Nama Barang  : Beras
+Harga        : Rp. 75000
+Jumlah       : 2
+
+Barang ke-2
+Nama Barang  : Minyak Goreng
+Harga        : Rp. 45000
+Jumlah       : 3
+
+Barang ke-3
+Nama Barang  : Gula
+Harga        : Rp. 15000
+Jumlah       : 4
+
+========= STRUK BELANJA =========
+No  Barang          Harga   Jumlah  Subtotal
+----------------------------------------
+1   Beras           Rp.75000   2     Rp.150000
+2   Minyak Goreng   Rp.45000   3     Rp.135000
+3   Gula            Rp.15000   4     Rp.60000
+----------------------------------------
+Total Belanja     : Rp.345000
+Diskon            : Rp.17250
+Total Pembayaran  : Rp.327750
+========= TERIMA KASIH =========</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-cpp.min.js"></script>
+</body>
+</html> 

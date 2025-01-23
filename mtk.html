@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Data Bivariat - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        .calculator-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+
+        .data-input {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2d3436;
+            font-weight: 600;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group textarea:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #4a90e2, #63b3ed);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #2d3436;
+            border: 1px solid #e1e8ed;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-container {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: #2d3436;
+        }
+
+        .result-value {
+            color: #4a90e2;
+            font-weight: 600;
+        }
+
+        #dataTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        #dataTable th, #dataTable td {
+            padding: 0.8rem;
+            border: 1px solid #e1e8ed;
+            text-align: center;
+        }
+
+        #dataTable th {
+            background: #f0f7ff;
+            color: #2d3436;
+            font-weight: 600;
+        }
+
+        #dataTable tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .scatter-plot {
+            width: 100%;
+            height: 400px;
+            margin: 2rem 0;
+            border: 1px solid #e1e8ed;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Kembali ke Portfolio
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="section-title">Analisis Data Bivariat</h1>
+
+        <div class="calculator-container">
+            <div class="guide-section" style="margin-bottom: 2rem; padding: 1.5rem; background: #f0f7ff; border-radius: 12px;">
+                <h3 style="margin-bottom: 1rem; color: #2d3436;">
+                    <i class="fas fa-info-circle"></i> 
+                    Panduan Penggunaan
+                </h3>
+                <p style="margin-bottom: 1rem; color: #636e72;">
+                    Untuk memulai, Anda dapat:
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="template_bivariat.xlsx" download class="btn btn-secondary">
+                        <i class="fas fa-download"></i>
+                        Download Template Excel
+                    </a>
+                    <div class="btn btn-secondary" onclick="showGuide()">
+                        <i class="fas fa-book"></i>
+                        Lihat Panduan Lengkap
+                    </div>
+                </div>
+            </div>
+
+            <div id="guideModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+                <div class="modal-content" style="position: relative; background: white; margin: 10% auto; padding: 2rem; width: 80%; max-width: 600px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <span class="close-btn" onclick="closeGuide()" style="position: absolute; right: 1rem; top: 1rem; cursor: pointer; font-size: 1.5rem;">&times;</span>
+                    <h3 style="margin-bottom: 1.5rem; color: #2d3436;">Panduan Penggunaan Template Excel</h3>
+                    <div style="color: #636e72; line-height: 1.6;">
+                        <ol style="padding-left: 1.2rem;">
+                            <li style="margin-bottom: 1rem;">Download template Excel yang disediakan</li>
+                            <li style="margin-bottom: 1rem;">Isi data X dan Y pada kolom yang tersedia</li>
+                            <li style="margin-bottom: 1rem;">Simpan file Excel tersebut</li>
+                            <li style="margin-bottom: 1rem;">Upload file menggunakan tombol "Import Excel"</li>
+                            <li>Klik "Hitung" untuk melihat hasil analisis</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-input">
+                <div class="input-group">
+                    <label for="dataX">Data X (pisahkan dengan koma)</label>
+                    <textarea id="dataX" rows="4" placeholder="Contoh: 1, 2, 3, 4, 5"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="dataY">Data Y (pisahkan dengan koma)</label>
+                    <textarea id="dataY" rows="4" placeholder="Contoh: 2, 4, 6, 8, 10"></textarea>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="calculateBivariate()">
+                    <i class="fas fa-calculator"></i>
+                    Hitung
+                </button>
+                <button class="btn btn-secondary" onclick="importExcel()">
+                    <i class="fas fa-file-excel"></i>
+                    Import Excel
+                </button>
+                <button class="btn btn-secondary" onclick="exportExcel()">
+                    <i class="fas fa-download"></i>
+                    Export Excel
+                </button>
+            </div>
+
+            <div id="results" class="results-container" style="display: none;">
+                <h3>Hasil Analisis</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="result-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <h4>Perhitungan Dasar</h4>
+                        <div class="result-item">
+                            <span class="result-label">Σ(X-X̄)²</span>
+                            <span class="result-value" id="sumXDev2">1424,95</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Σ(Y-Ȳ)²</span>
+                            <span class="result-value" id="sumYDev2">97,75</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Σ(X-X̄)(Y-Ȳ)</span>
+                            <span class="result-value" id="sumXYDev">351,25</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <h4>Hasil Akhir</h4>
+                        <div class="result-item">
+                            <span class="result-label">Koefisien Korelasi (r)</span>
+                            <span class="result-value" id="correlation">0.9415</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Koefisien Determinasi (r²)</span>
+                            <span class="result-value" id="determination">0.8864</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tableContainer" style="margin-top: 2rem; display: none;">
+                <h3>Tabel Data dan Perhitungan</h3>
+                <table id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>X</th>
+                            <th>Y</th>
+                            <th>X - X̄</th>
+                            <th>Y - Ȳ</th>
+                            <th>(X - X̄)²</th>
+                            <th>(Y - Ȳ)²</th>
+                            <th>(X - X̄)(Y - Ȳ)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                    <tfoot id="tableFoot" style="font-weight: bold; background: #f0f7ff;">
+                        <tr>
+                            <td>Jumlah (Σ)</td>
+                            <td id="sumX">0</td>
+                            <td id="sumY">0</td>
+                            <td id="sumXDev">0</td>
+                            <td id="sumYDev">0</td>
+                            <td id="sumXDev2Table">0</td>
+                            <td id="sumYDev2Table">0</td>
+                            <td id="sumXYDevTable">0</td>
+                        </tr>
+                        <tr>
+                            <td>Rata-rata</td>
+                            <td id="meanXTable">0</td>
+                            <td id="meanYTable">0</td>
+                            <td colspan="5"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div id="plotContainer" class="scatter-plot" style="display: none;"></div>
+        </div>
+    </main>
+
+    <script>
+        function calculateBivariate() {
+            const xData = document.getElementById('dataX').value.split(',').map(x => parseFloat(x.trim()));
+            const yData = document.getElementById('dataY').value.split(',').map(y => parseFloat(y.trim()));
+
+            if (xData.length !== yData.length) {
+                alert('Jumlah data X dan Y harus sama!');
+                return;
+            }
+
+            const n = xData.length;
+            
+            // Hitung mean seperti di Excel Anda
+            const meanX = xData.reduce((a, b) => a + b, 0) / n;  // akan mendekati 163.6
+            const meanY = yData.reduce((a, b) => a + b, 0) / n;  // akan mendekati 40.3
+
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+            
+            let sumX = 0, sumY = 0, sumXDev = 0, sumYDev = 0;
+            let sumXDev2 = 0, sumYDev2 = 0, sumXYDev = 0;
+            
+            for (let i = 0; i < n; i++) {
+                sumX += xData[i];
+                sumY += yData[i];
+                
+                const xDev = xData[i] - meanX;  // X-X'
+                const yDev = yData[i] - meanY;  // Y-Y'
+                const xDev2 = xDev * xDev;     // (X-X')²
+                const yDev2 = yDev * yDev;     // (Y-Y')²
+                const xyDev = xDev * yDev;     // (X-X')(Y-Y')
+
+                sumXDev += xDev;
+                sumYDev += yDev;
+                sumXDev2 += xDev2;
+                sumYDev2 += yDev2;
+                sumXYDev += xyDev;
+
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = i + 1;
+                row.insertCell(1).textContent = xData[i].toFixed(2);
+                row.insertCell(2).textContent = yData[i].toFixed(2);
+                row.insertCell(3).textContent = xDev.toFixed(2);
+                row.insertCell(4).textContent = yDev.toFixed(2);
+                row.insertCell(5).textContent = xDev2.toFixed(4);
+                row.insertCell(6).textContent = yDev2.toFixed(4);
+                row.insertCell(7).textContent = xyDev.toFixed(4);
+            }
+
+            // Update jumlah dan rata-rata di tabel
+            document.getElementById('sumX').textContent = sumX.toFixed(2);
+            document.getElementById('sumY').textContent = sumY.toFixed(2);
+            document.getElementById('sumXDev').textContent = sumXDev.toFixed(2);
+            document.getElementById('sumYDev').textContent = sumYDev.toFixed(2);
+            document.getElementById('sumXDev2Table').textContent = sumXDev2.toFixed(4);
+            document.getElementById('sumYDev2Table').textContent = sumYDev2.toFixed(4);
+            document.getElementById('sumXYDevTable').textContent = sumXYDev.toFixed(4);
+            
+            document.getElementById('meanXTable').textContent = meanX.toFixed(2);
+            document.getElementById('meanYTable').textContent = meanY.toFixed(2);
+
+            // Update hasil perhitungan
+            document.getElementById('sumXDev2').textContent = sumXDev2.toFixed(4);
+            document.getElementById('sumYDev2').textContent = sumYDev2.toFixed(4);
+            document.getElementById('sumXYDev').textContent = sumXYDev.toFixed(4);
+
+            // Hitung korelasi
+            const r = sumXYDev / Math.sqrt(sumXDev2 * sumYDev2);
+            document.getElementById('correlation').textContent = r.toFixed(4);
+            document.getElementById('determination').textContent = (r * r).toFixed(4);
+
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('tableContainer').style.display = 'block';
+        }
+
+        function importExcel() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.xlsx,.xls';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, {type: 'array'});
+                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+                    
+                    if (jsonData.length > 0) {
+                        const xData = [];
+                        const yData = [];
+                        jsonData.forEach(row => {
+                            xData.push(row.X);
+                            yData.push(row.Y);
+                        });
+                        document.getElementById('dataX').value = xData.join(', ');
+                        document.getElementById('dataY').value = yData.join(', ');
+                        calculateBivariate();
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            };
+            input.click();
+        }
+
+        function exportExcel() {
+            const xData = document.getElementById('dataX').value.split(',').map(x => parseFloat(x.trim()));
+            const yData = document.getElementById('dataY').value.split(',').map(y => parseFloat(y.trim()));
+            
+            const meanX = xData.reduce((a, b) => a + b, 0) / xData.length;
+            const meanY = yData.reduce((a, b) => a + b, 0) / yData.length;
+            
+            const data = xData.map((x, i) => ({
+                'NO.': i + 1,
+                'x': x,
+                'y': yData[i],
+                'x-x\'': (x - meanX).toFixed(2),
+                'y-y\'': (yData[i] - meanY).toFixed(2),
+                '(x-x\')^2': ((x - meanX) * (x - meanX)).toFixed(4),
+                '(y-y\')^2': ((yData[i] - meanY) * (yData[i] - meanY)).toFixed(4),
+                '(x-x\')*(y-y\')': ((x - meanX) * (yData[i] - meanY)).toFixed(4)
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Analisis Bivariat");
+            XLSX.writeFile(wb, "analisis_bivariat.xlsx");
+        }
+
+        function showGuide() {
+            document.getElementById('guideModal').style.display = 'block';
+        }
+
+        function closeGuide() {
+            document.getElementById('guideModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('guideModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2024 Portfolio Saya. Hak Cipta Dilindungi.</p>
+    </footer>
+</body>
+</html> 

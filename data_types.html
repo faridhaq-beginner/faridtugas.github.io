@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Data Diri & Tipe Data</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        .program-container {
+            max-width: 900px;
+            margin: 120px auto 40px;
+            padding: 2rem;
+        }
+
+        .program-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .program-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .type-explanation {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .type-explanation h3 {
+            color: #2d3436;
+            margin-bottom: 1rem;
+        }
+
+        .type-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .type-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #0984e3;
+        }
+
+        .type-content h4 {
+            margin: 0;
+            color: #2d3436;
+        }
+
+        .type-content p {
+            margin: 0.5rem 0 0;
+            color: #636e72;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: white;
+            background: var(--accent-gradient);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        pre {
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .output-example {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="program-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Kembali ke Portfolio</span>
+        </a>
+
+        <div class="program-header">
+            <h1>Program Data Diri & Tipe Data</h1>
+            <p>Pengenalan berbagai tipe data dalam pemrograman melalui contoh data diri</p>
+        </div>
+
+        <div class="program-section">
+            <h2>Penjelasan Tipe Data</h2>
+            <div class="type-explanation">
+                <div class="type-item">
+                    <i class="fas fa-font type-icon"></i>
+                    <div class="type-content">
+                        <h4>String</h4>
+                        <p>Digunakan untuk menyimpan teks seperti nama siswa</p>
+                        <p>Contoh: "Muh. Farid Haq Al B."</p>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <i class="fas fa-calculator type-icon"></i>
+                    <div class="type-content">
+                        <h4>Integer (int)</h4>
+                        <p>Digunakan untuk menyimpan bilangan bulat seperti umur</p>
+                        <p>Contoh: 16</p>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <i class="fas fa-weight type-icon"></i>
+                    <div class="type-content">
+                        <h4>Float</h4>
+                        <p>Digunakan untuk bilangan desimal dengan presisi rendah seperti berat badan</p>
+                        <p>Contoh: 65.5</p>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <i class="fas fa-percentage type-icon"></i>
+                    <div class="type-content">
+                        <h4>Double</h4>
+                        <p>Digunakan untuk bilangan desimal dengan presisi tinggi seperti nilai</p>
+                        <p>Contoh: 95.75</p>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <i class="fas fa-signature type-icon"></i>
+                    <div class="type-content">
+                        <h4>Character (char)</h4>
+                        <p>Digunakan untuk menyimpan karakter tunggal seperti golongan darah</p>
+                        <p>Contoh: 'A'</p>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <i class="fas fa-toggle-on type-icon"></i>
+                    <div class="type-content">
+                        <h4>Boolean (bool)</h4>
+                        <p>Digunakan untuk nilai true/false seperti status siswa aktif</p>
+                        <p>Contoh: true</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="program-section">
+            <h2>Kode Program</h2>
+            <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    // Deklarasi variabel dengan berbagai tipe data
+    string nama = "Muh. Farid Haq Al B.";
+    int umur = 16;
+    float beratBadan = 65.5;
+    double nilai = 95.75;
+    char golonganDarah = 'A';
+    bool statusAktif = true;
+
+    // Menampilkan data
+    cout << "====== DATA DIRI SISWA ======" << endl;
+    cout << "Nama          : " << nama << endl;
+    cout << "Umur          : " << umur << " tahun" << endl;
+    cout << "Berat Badan   : " << beratBadan << " kg" << endl;
+    cout << "Nilai         : " << nilai << endl;
+    cout << "Golongan Darah: " << golonganDarah << endl;
+    cout << "Status Aktif  : " << (statusAktif ? "Ya" : "Tidak") << endl;
+    cout << "==========================" << endl;
+
+    return 0;
+}</code></pre>
+
+            <h2>Output Program</h2>
+            <div class="output-example">
+====== DATA DIRI SISWA ======<br>
+Nama          : Muh. Farid Haq Al B.<br>
+Umur          : 16 tahun<br>
+Berat Badan   : 65.5 kg<br>
+Nilai         : 95.75<br>
+Golongan Darah: A<br>
+Status Aktif  : Ya<br>
+==========================
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-cpp.min.js"></script>
+</body>
+</html> 
