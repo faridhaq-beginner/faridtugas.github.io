@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Saya</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .explanation-section {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+        }
+
+        .explanation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .explanation-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .explanation-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-header i {
+            font-size: 1.5rem;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .card-content ul li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .card-content ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-content code {
+            background: #f1f3f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            color: #e03131;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .card-content ul ul {
+            margin-top: 0.5rem;
+            margin-left: 1rem;
+            border-left: 2px solid #e9ecef;
+            padding-left: 1rem;
+        }
+
+        .explanation-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .explanation-section h2 i {
+            font-size: 2rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .explanation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        #analisis-bivariat {
+            background: var(--section-bg);
+            padding: 4rem 2rem;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .guide-section {
+            background: #f0f7ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .guide-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .data-input {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2d3436;
+            font-weight: 600;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #2d3436;
+            border: 1px solid #e1e8ed;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .calculator-container {
+                padding: 1rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Style untuk tabel modern */
+        #dataTable {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+
+        #dataTable thead {
+            background: linear-gradient(145deg, #4a90e2, #63b3ed);
+            color: white;
+        }
+
+        #dataTable th {
+            padding: 1.2rem 1rem;
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            border: none;
+        }
+
+        #dataTable td {
+            padding: 1rem;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid #e1e8ed;
+            font-size: 0.9rem;
+            color: #2d3436;
+        }
+
+        #dataTable tbody tr:hover {
+            background: #f8f9fa;
+            transition: background 0.3s ease;
+        }
+
+        #dataTable tfoot {
+            background: #f0f7ff;
+            font-weight: 600;
+        }
+
+        #dataTable tfoot td {
+            border-bottom: none;
+        }
+
+        #dataTable tfoot tr:first-child {
+            border-top: 2px solid #4a90e2;
+        }
+
+        /* Animasi untuk baris tabel */
+        #dataTable tbody tr {
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        #dataTable tbody tr:nth-child(1) { animation-delay: 0.1s; }
+        #dataTable tbody tr:nth-child(2) { animation-delay: 0.2s; }
+        #dataTable tbody tr:nth-child(3) { animation-delay: 0.3s; }
+        #dataTable tbody tr:nth-child(4) { animation-delay: 0.4s; }
+        #dataTable tbody tr:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Responsif untuk tabel */
+        @media (max-width: 768px) {
+            #dataTable {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            #dataTable th, 
+            #dataTable td {
+                padding: 0.8rem 0.6rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Style untuk highlight nilai penting */
+        #dataTable td[id^="sum"],
+        #dataTable td[id^="mean"] {
+            color: #4a90e2;
+            font-weight: 600;
+        }
+
+        /* Hover effect untuk sel tabel */
+        #dataTable tbody td:hover {
+            background: #e3f2fd;
+            transition: background 0.3s ease;
+        }
+
+        /* Style untuk header kolom */
+        #dataTable th {
+            position: relative;
+            cursor: help;
+        }
+
+        #dataTable th::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        #dataTable th:hover::after {
+            width: 80%;
+        }
+
+        /* Style untuk tooltip pada header */
+        #dataTable th:hover::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            visibility: visible;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #dataTable th:hover::before {
+            opacity: 1;
+        }
+
+        /* Style untuk hasil analisis */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #4a90e2, #63b3ed);
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .result-card h4 {
+            color: #2d3436;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .result-card h4 i {
+            color: #4a90e2;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .result-item:hover {
+            background: #e3f2fd;
+        }
+
+        .result-label {
+            font-weight: 500;
+            color: #2d3436;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .result-value {
+            font-weight: 600;
+            color: #4a90e2;
+            font-size: 1.1rem;
+            padding: 0.3rem 0.8rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animasi untuk hasil */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .result-item {
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .result-item:nth-child(1) { animation-delay: 0.1s; }
+        .result-item:nth-child(2) { animation-delay: 0.2s; }
+        .result-item:nth-child(3) { animation-delay: 0.3s; }
+
+        .program-section {
+            padding: 4rem 2rem;
+            background: var(--section-bg);
+        }
+
+        .program-section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .program-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <button class="menu-toggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul>
+                <li><a href="#beranda"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="#tentang"><i class="fas fa-user"></i> Tentang Saya</a></li>
+                <li><a href="#portfolio"><i class="fas fa-code"></i> Program</a></li>
+                <li><a href="#analisis-bivariat"><i class="fas fa-chart-line"></i> Analisis Bivariat</a></li>
+                <li><a href="#kontak"><i class="fas fa-envelope"></i> Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="beranda" class="hero">
+            <div class="hero-content">
+                <img src="FotoProfil.jpg" alt="Foto Profil" class="profile-img">
+                <h1>Selamat Datang di Portfolio Saya</h1>
+                <p class="description">Halaman inilah yang akan saya gunakan untuk mengumpulkan semua tugas pemrograman dari mapel Informatika</p>
+                <p class="tagline">Beginner | Student</p>
+            </div>
+        </section>
+
+        <section id="tentang">
+            <h2>Tentang Saya</h2>
+            <div class="about-content">
+                <p>Perkenalkan saya adalah Muh. Farid Haq Al B. seorang siswa biasa dari SMA Negeri 5 Makassar yang memiliki impian jadi orang sukses dan masuk surga.</p>
+                
+                <div class="skills">
+                    <h3>Prinsip Hidup</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-pray fa-2x"></i><br>
+                            <span class="skill-title">Berdoa</span>
+                            <p class="skill-desc">Memulai segala sesuatu dengan doa dan tawakal</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-hand-fist fa-2x"></i><br>
+                            <span class="skill-title">Berusaha</span>
+                            <p class="skill-desc">Pantang menyerah dalam menggapai cita-cita</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-book-open fa-2x"></i><br>
+                            <span class="skill-title">Belajar</span>
+                            <p class="skill-desc">Terus menimba ilmu sepanjang hayat</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-bed fa-2x"></i><br>
+                            <span class="skill-title">Beristirahat</span>
+                            <p class="skill-desc">Menjaga keseimbangan dengan istirahat yang cukup</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <h2>Program</h2>
+            <div class="portfolio-grid">
+                <!-- Data Diri & Tipe Data -->
+                <div class="program-card">
+                    <div class="program-content">
+                        <i class="fas fa-user-circle fa-3x"></i>
+                        <h3>Data Diri & Tipe Data</h3>
+                        <p>Program pengenalan berbagai tipe data dalam pemrograman melalui contoh data diri</p>
+                        <div class="program-tech">
+                            <span>C++</span>
+                            <span>Basic</span>
+                        </div>
+                        <a href="#data-types" class="program-link">
+                            <span>Lihat Program</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Kasir Toko Sembako -->
+                <div class="program-card">
+                    <div class="program-content">
+                        <i class="fas fa-cash-register fa-3x"></i>
+                        <h3>Kasir Toko Sembako</h3>
+                        <p>Program kasir sederhana untuk menghitung total belanja dengan fitur diskon</p>
+                        <div class="program-tech">
+                            <span>C++</span>
+                            <span>Basic</span>
+                        </div>
+                        <a href="#kasir-sembako" class="program-link">
+                            <span>Lihat Program</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Program Aktivitas -->
+                <div class="program-card">
+                    <div class="program-content">
+                        <i class="fas fa-tasks fa-3x"></i>
+                        <h3>Program Aktivitas</h3>
+                        <p>Program sederhana untuk mencatat aktivitas dan lokasi menggunakan input/output dasar</p>
+                        <div class="program-tech">
+                            <span>C++</span>
+                            <span>Basic</span>
+                        </div>
+                        <a href="#aktivitas" class="program-link">
+                            <span>Lihat Program</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Operator Aritmatika -->
+                <div class="program-card">
+                    <div class="program-content">
+                        <i class="fas fa-calculator fa-3x"></i>
+                        <h3>Operator Aritmatika</h3>
+                        <p>Program demonstrasi penggunaan berbagai operator aritmatika dalam C++</p>
+                        <div class="program-tech">
+                            <span>C++</span>
+                            <span>Basic</span>
+                        </div>
+                        <a href="#operator" class="program-link">
+                            <span>Lihat Program</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Analisis Data Bivariat -->
+                <div class="program-card">
+                    <div class="program-content">
+                        <i class="fas fa-chart-line fa-3x"></i>
+                        <h3>Analisis Data Bivariat</h3>
+                        <p>Program untuk menganalisis hubungan antara dua variabel dengan perhitungan statistik lengkap</p>
+                        <div class="program-tech">
+                            <span>JavaScript</span>
+                            <span>Excel</span>
+                            <span>Statistics</span>
+                        </div>
+                        <div class="program-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Perhitungan Korelasi</li>
+                                <li><i class="fas fa-check"></i> Import/Export Excel</li>
+                                <li><i class="fas fa-check"></i> Analisis Lengkap</li>
+                            </ul>
+                        </div>
+                        <a href="#analisis-bivariat" class="program-link">
+                            <span>Lihat Program</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Data Types -->
+        <section id="data-types" class="program-section">
+            <!-- Pindahkan konten dari data_types.html ke sini -->
+        </section>
+
+        <!-- Section Kasir Sembako -->
+        <section id="kasir-sembako" class="program-section">
+            <!-- Pindahkan konten dari kasir_sembako.html ke sini -->
+        </section>
+
+        <!-- Section Aktivitas -->
+        <section id="aktivitas" class="program-section">
+            <!-- Pindahkan konten dari aktivitas.html ke sini -->
+        </section>
+
+        <!-- Section Operator -->
+        <section id="operator" class="program-section">
+            <!-- Pindahkan konten dari operator.html ke sini -->
+        </section>
+
+        <section id="kontak">
+            <h2>Kontak</h2>
+            <div class="contact-info">
+                <p>
+                    <a href="mailto:muh.farid6596@sma.belajar.id" style="text-decoration: none; color: inherit;">
+                        <i class="fas fa-envelope"></i> muh.farid6596@sma.belajar.id
+                    </a>
+                </p>
+                <p>
+                    <a href="https://www.instagram.com/faridhaqal" target="_blank" style="text-decoration: none; color: inherit;">
+                        <i class="fab fa-instagram"></i> @faridhaqal
+                    </a>
+                </p>
+            </div>
+        </section>
+
+        <section id="analisis-bivariat" class="section">
+            <div class="container">
+                <h2 class="section-title">Analisis Data Bivariat</h2>
+                
+                <div class="calculator-container">
+                    <div class="guide-section">
+                        <h3>
+                            <i class="fas fa-info-circle"></i> 
+                            Panduan Penggunaan
+                        </h3>
+                        <p>Untuk memulai, Anda dapat:</p>
+                        <div class="guide-buttons">
+                            <a href="template_bivariat.xlsx" download class="btn btn-secondary">
+                                <i class="fas fa-download"></i>
+                                Download Template Excel
+                            </a>
+                            <div class="btn btn-secondary" onclick="showGuide()">
+                                <i class="fas fa-book"></i>
+                                Lihat Panduan Lengkap
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-input">
+                        <div class="input-group">
+                            <label for="dataX">Data X (pisahkan dengan koma)</label>
+                            <textarea id="dataX" rows="4" placeholder="Contoh: 1, 2, 3, 4, 5"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="dataY">Data Y (pisahkan dengan koma)</label>
+                            <textarea id="dataY" rows="4" placeholder="Contoh: 2, 4, 6, 8, 10"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="calculateBivariate()">
+                            <i class="fas fa-calculator"></i>
+                            Hitung
+                        </button>
+                        <button class="btn btn-secondary" onclick="importExcel()">
+                            <i class="fas fa-file-excel"></i>
+                            Import Excel
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportExcel()">
+                            <i class="fas fa-download"></i>
+                            Export Excel
+                        </button>
+                    </div>
+
+                    <div id="results" class="results-container" style="display: none;">
+                        <h3 class="section-title">Hasil Analisis</h3>
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <h4><i class="fas fa-calculator"></i> Perhitungan Dasar</h4>
+                                <div class="result-item">
+                                    <span class="result-label">
+                                        <i class="fas fa-square-root-alt"></i>
+                                        Σ(X-X̄)²
+                                    </span>
+                                    <span class="result-value" id="sumXDev2">0</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">
+                                        <i class="fas fa-square-root-alt"></i>
+                                        Σ(Y-Ȳ)²
+                                    </span>
+                                    <span class="result-value" id="sumYDev2">0</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">
+                                        <i class="fas fa-times"></i>
+                                        Σ(X-X̄)(Y-Ȳ)
+                                    </span>
+                                    <span class="result-value" id="sumXYDev">0</span>
+                                </div>
+                            </div>
+
+                            <div class="result-card">
+                                <h4><i class="fas fa-chart-line"></i> Hasil Akhir</h4>
+                                <div class="result-item">
+                                    <span class="result-label">
+                                        <i class="fas fa-link"></i>
+                                        Koefisien Korelasi (r)
+                                    </span>
+                                    <span class="result-value" id="correlation">0</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">
+                                        <i class="fas fa-percentage"></i>
+                                        Koefisien Determinasi (r²)
+                                    </span>
+                                    <span class="result-value" id="determination">0</span>
+                                </div>
+                                <div class="result-item interpretation">
+                                    <span class="result-label">
+                                        <i class="fas fa-info-circle"></i>
+                                        Interpretasi
+                                    </span>
+                                    <span class="result-value" id="interpretation">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tableContainer" style="display: none;">
+                        <h3>Tabel Data dan Perhitungan</h3>
+                        <table id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>X</th>
+                                    <th>Y</th>
+                                    <th>X - X̄</th>
+                                    <th>Y - Ȳ</th>
+                                    <th>(X - X̄)²</th>
+                                    <th>(Y - Ȳ)²</th>
+                                    <th>(X - X̄)(Y - Ȳ)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                            <tfoot id="tableFoot">
+                                <tr>
+                                    <td>Jumlah (Σ)</td>
+                                    <td id="sumX">0</td>
+                                    <td id="sumY">0</td>
+                                    <td id="sumXDev">0</td>
+                                    <td id="sumYDev">0</td>
+                                    <td id="sumXDev2Table">0</td>
+                                    <td id="sumYDev2Table">0</td>
+                                    <td id="sumXYDevTable">0</td>
+                                </tr>
+                                <tr>
+                                    <td>Rata-rata</td>
+                                    <td id="meanXTable">0</td>
+                                    <td id="meanYTable">0</td>
+                                    <td colspan="5"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Portfolio Saya. Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <div id="deviceWarning" class="modal">
+        <div class="modal-content">
+            <h3>⚠️ Peringatan Tampilan</h3>
+            <p>Untuk pengalaman terbaik dalam melihat portfolio ini:</p>
+            <ul>
+                <li>💻 Gunakan laptop/tablet untuk tampilan optimal</li>
+                <li>📱 Jika menggunakan HP, putar layar ke posisi horizontal</li>
+                <li>🔄 Pastikan auto-rotate pada HP Anda aktif</li>
+            </ul>
+            <button onclick="closeModal()">Saya Mengerti</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const sections = document.querySelectorAll('section');
+            
+            // Set active class based on current section
+            function setActiveSection() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= (sectionTop - sectionHeight/3)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Set initial active state
+            setActiveSection();
+
+            // Update active state on scroll
+            window.addEventListener('scroll', setActiveSection);
+
+            // Update active state on click
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav ul');
+
+            // Toggle menu saat tombol diklik
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('active');
+            });
+
+            // Tutup menu saat link diklik
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('active');
+                });
+            });
+
+            // Tutup menu saat scroll
+            window.addEventListener('scroll', () => {
+                nav.classList.remove('active');
+            });
+
+            // Fungsi untuk mengecek orientasi dan device
+            function checkDeviceAndOrientation() {
+                const modal = document.getElementById('deviceWarning');
+                
+                // Cek apakah menggunakan mobile
+                if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    if(window.innerHeight > window.innerWidth) {
+                        modal.style.display = 'block';
+                        document.body.style.overflow = 'hidden'; // Mencegah scroll
+                    } else {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = ''; // Mengembalikan scroll
+                    }
+                }
+            }
+
+            // Fungsi untuk menutup modal
+            window.closeModal = function() {
+                document.getElementById('deviceWarning').style.display = 'none';
+                document.body.style.overflow = ''; // Mengembalikan scroll
+            }
+
+            // Jalankan pengecekan saat halaman dimuat
+            checkDeviceAndOrientation();
+
+            // Jalankan pengecekan saat orientasi berubah
+            window.addEventListener('orientationchange', function() {
+                setTimeout(checkDeviceAndOrientation, 100); // Delay sedikit untuk memastikan orientasi sudah berubah
+            });
+
+            // Jalankan pengecekan saat ukuran window berubah
+            window.addEventListener('resize', function() {
+                checkDeviceAndOrientation();
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        function calculateBivariate() {
+            const xData = document.getElementById('dataX').value.split(',').map(x => parseFloat(x.trim()));
+            const yData = document.getElementById('dataY').value.split(',').map(y => parseFloat(y.trim()));
+
+            if (xData.length !== yData.length) {
+                alert('Jumlah data X dan Y harus sama!');
+                return;
+            }
+
+            const n = xData.length;
+            
+            // Hitung mean
+            const meanX = xData.reduce((a, b) => a + b, 0) / n;
+            const meanY = yData.reduce((a, b) => a + b, 0) / n;
+
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+            
+            let sumX = 0, sumY = 0, sumXDev = 0, sumYDev = 0;
+            let sumXDev2 = 0, sumYDev2 = 0, sumXYDev = 0;
+            
+            for (let i = 0; i < n; i++) {
+                sumX += xData[i];
+                sumY += yData[i];
+                
+                const xDev = xData[i] - meanX;
+                const yDev = yData[i] - meanY;
+                const xDev2 = xDev * xDev;
+                const yDev2 = yDev * yDev;
+                const xyDev = xDev * yDev;
+
+                sumXDev += xDev;
+                sumYDev += yDev;
+                sumXDev2 += xDev2;
+                sumYDev2 += yDev2;
+                sumXYDev += xyDev;
+
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = i + 1;
+                row.insertCell(1).textContent = xData[i].toFixed(2);
+                row.insertCell(2).textContent = yData[i].toFixed(2);
+                row.insertCell(3).textContent = xDev.toFixed(2);
+                row.insertCell(4).textContent = yDev.toFixed(2);
+                row.insertCell(5).textContent = xDev2.toFixed(4);
+                row.insertCell(6).textContent = yDev2.toFixed(4);
+                row.insertCell(7).textContent = xyDev.toFixed(4);
+            }
+
+            // Update jumlah dan rata-rata di tabel
+            document.getElementById('sumX').textContent = sumX.toFixed(2);
+            document.getElementById('sumY').textContent = sumY.toFixed(2);
+            document.getElementById('sumXDev').textContent = sumXDev.toFixed(2);
+            document.getElementById('sumYDev').textContent = sumYDev.toFixed(2);
+            document.getElementById('sumXDev2Table').textContent = sumXDev2.toFixed(4);
+            document.getElementById('sumYDev2Table').textContent = sumYDev2.toFixed(4);
+            document.getElementById('sumXYDevTable').textContent = sumXYDev.toFixed(4);
+            
+            document.getElementById('meanXTable').textContent = meanX.toFixed(2);
+            document.getElementById('meanYTable').textContent = meanY.toFixed(2);
+
+            // Update hasil perhitungan
+            document.getElementById('sumXDev2').textContent = sumXDev2.toFixed(4);
+            document.getElementById('sumYDev2').textContent = sumYDev2.toFixed(4);
+            document.getElementById('sumXYDev').textContent = sumXYDev.toFixed(4);
+
+            // Hitung korelasi
+            const r = sumXYDev / Math.sqrt(sumXDev2 * sumYDev2);
+            document.getElementById('correlation').textContent = r.toFixed(4);
+            document.getElementById('determination').textContent = (r * r).toFixed(4);
+
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('tableContainer').style.display = 'block';
+        }
+
+        function importExcel() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.xlsx,.xls';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, {type: 'array'});
+                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+                    
+                    if (jsonData.length > 0) {
+                        const xData = [];
+                        const yData = [];
+                        jsonData.forEach(row => {
+                            xData.push(row.X);
+                            yData.push(row.Y);
+                        });
+                        document.getElementById('dataX').value = xData.join(', ');
+                        document.getElementById('dataY').value = yData.join(', ');
+                        calculateBivariate();
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            };
+            input.click();
+        }
+
+        function exportExcel() {
+            const xData = document.getElementById('dataX').value.split(',').map(x => parseFloat(x.trim()));
+            const yData = document.getElementById('dataY').value.split(',').map(y => parseFloat(y.trim()));
+            
+            const meanX = xData.reduce((a, b) => a + b, 0) / xData.length;
+            const meanY = yData.reduce((a, b) => a + b, 0) / yData.length;
+            
+            const data = xData.map((x, i) => ({
+                'NO.': i + 1,
+                'x': x,
+                'y': yData[i],
+                'x-x\'': (x - meanX).toFixed(2),
+                'y-y\'': (yData[i] - meanY).toFixed(2),
+                '(x-x\')^2': ((x - meanX) * (x - meanX)).toFixed(4),
+                '(y-y\')^2': ((yData[i] - meanY) * (yData[i] - meanY)).toFixed(4),
+                '(x-x\')*(y-y\')': ((x - meanX) * (yData[i] - meanY)).toFixed(4)
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Analisis Bivariat");
+            XLSX.writeFile(wb, "analisis_bivariat.xlsx");
+        }
+
+        function showGuide() {
+            document.getElementById('guideModal').style.display = 'block';
+        }
+
+        function closeGuide() {
+            document.getElementById('guideModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html> 
